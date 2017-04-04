@@ -18,23 +18,23 @@ variable = new XMLHttpRequest();
 ```
 
 ### XMLHttpRequest Object Methods
-* new XMLHttpRequest()               :                Creates a new XMLHttpRequest object
-* abort()                            :                Cancels the current request
-* getAllReponseHeaders()             :                Returns header information
-* get ReponseHeader()                :                Returns specific header information
+* new XMLHttpRequest(): Creates a new XMLHttpRequest object
+* abort(): Cancels the current request
+* getAllReponseHeaders(): Returns header information
+* get ReponseHeader(): Returns specific header information
 * open(method, url, async, user, psw): Specifies the request
-    method: the request type GET or POST
-    url: the file location
-    async: true (asynchronous) or false (synchronous)
-    user: optional user name
-    psw: optional password
+    * method: the request type GET or POST
+    * url: the file location
+    * async: true (asynchronous) or false (synchronous)
+    * user: optional user name
+    * psw: optional password
 * send(): 
-  Sends the request to the server
-  Used for GET requests
+    * Sends the request to the server
+    * Used for GET requests
 * send(string): 
-  Sends the request to the server
-  Used for POST requests
-* setRequestHeader()                 : Adds a label/value pair to the header to be sent
+    * Sends the request to the server
+    * Used for POST requests
+* setRequestHeader(): Adds a label/value pair to the header to be sent
 ### Handling binary data
 You need to add the event listeners before calling open() on the request.  Otherwise the progress events will not fire.
 ### Submitting forms and uploading files
@@ -63,13 +63,13 @@ Use POST requests when:
 * Sending user input(which can contain unknown characters), POST is more robust and secure than GET.
 
 ## AJAX - Server Response
-* onreadystatechange:	Defines a function to be called when the readyState property changes
-* readyState	      : Holds the status of the XMLHttpRequest. 
-  0: request not initialized 
-  1: server connection established
-  2: request received 
-  3: processing request 
-  4: request finished and response is ready
+* onreadystatechange: Defines a function to be called when the readyState property changes
+* readyState: Holds the status of the XMLHttpRequest. 
+    * 0: request not initialized 
+    * 1: server connection established
+    * 2: request received 
+    * 3: processing request 
+    * 4: request finished and response is ready
 
 * status: 
   200: "OK"
@@ -86,7 +86,7 @@ responseText: get the response data as a string
 responseXML:  get the response data as XML data
 
 ## Server Response Methods
-getResponseHeader()    : Returns specific header information from the server resource
+getResponseHeader(): Returns specific header information from the server resource
 getAllResponseHeaders(): Returns all the header information from the server resource
 
 ## Browser Support
