@@ -47,13 +47,34 @@ An html `<form>` can be sent in four ways:
 * using the POST method and setting the enctype attribute to multipart/form-data;
 * using the GET method (in this case the enctype attribute will be ignored).
 ### XMLHttpRequest Properties
+* onreadystatechange: Defines a function to be called when the readyState property changes
+* readyState: Holds the status of the XMLHttpRequest. 
+    * 0: request not initialized 
+    * 1: server connection established
+    * 2: request received 
+    * 3: processing request 
+    * 4: request finished and response is ready
 
+* status:
+   * 200: "OK"
+   * 403: "Forbidden"
+   * 404: "Page not found"
+                      
+* statusText: Returns the status-text (e.g. "OK" or "Not Found")
 
 ## AJAX - Send a Request to a Server
 The XMLHttpRequest object is used to exchange data with a server.
+Using GET 
 ```
 xhttp.open("GET", "ajax_info.txt", true);
 xhttp.send();
+```
+USING POST
+To POST data like an HTML form, add an HTTP header with setRequestHeader(). Specify the data you want to send in the send() method:
+```
+xhttp.open("POST", "ajax_test.asp", true);
+xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xhttp.send("fname=Henry&lname=Ford");
 ```
 ### GET or POST?
 GET is simpler and faster than POST, can be used in most cases
@@ -63,29 +84,28 @@ Use POST requests when:
 * Sending user input(which can contain unknown characters), POST is more robust and secure than GET.
 
 ## AJAX - Server Response
-* onreadystatechange: Defines a function to be called when the readyState property changes
-* readyState: Holds the status of the XMLHttpRequest. 
-    * 0: request not initialized 
-    * 1: server connection established
-    * 2: request received 
-    * 3: processing request 
-    * 4: request finished and response is ready
+```
+function loadDoc() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("demo").innerHTML =
+            this.responseText;
+       }
+    };
+    xhttp.open("GET", "ajax_info.txt", true);
+    xhttp.send(); 
+}
+```
 
-* status: 
-  200: "OK"
-  403: "Forbidden"
-  404: "Page not found"
-                      
-* statusText: Returns the status-text (e.g. "OK" or "Not Found")
-
-## Using a Callback Function
+### Using a Callback Function
 A callback function is a function passed as a parameter to another function
 
-## Server Response Properties
+### Server Response Properties
 responseText: get the response data as a string
 responseXML:  get the response data as XML data
 
-## Server Response Methods
+### Server Response Methods
 getResponseHeader(): Returns specific header information from the server resource
 getAllResponseHeaders(): Returns all the header information from the server resource
 
@@ -173,3 +193,90 @@ respond_to do |format|
   format.html
   format.json
  end
+```
+
+# HTTP Request & Response
+It's a stateless request-response based communication protocol. It's used to send and receive data on the Web i.e., over the Internet. This protocol uses reliable TCP connections either for the transfer of data to and from clients which are Web Browsers in this case. HTTP is a stateless protocol means the HTTP Server doesn't maintain the contextual information about the clients communicating with it and hence we need to maintain sessions in case we need that feature for our Web-applications.
+
+An HTTP request consists of two parts: a header that contains a set of global metadata about the browser's capabilities, and a body that can contain information necessary for the server to process the specific request.
+
+* ##GET - Requests data from a specified resource
+Note that the query string (name/value pairs) is sent in the URL of a GET request
+```
+/test/demo_form.php?name1=value1&name2=value2
+```
+   * GET requests can be cached
+   * GET requests remain in the browser history
+   * GET requests can be bookmarked
+   * GET requests should never be used when dealing with sensitive data
+   * GET requests have length restrictions
+   * GET requests should be used only to retrieve data
+
+* ##POST - Submits data to be processed to a specified resource
+Note that the query string (name/value pairs) is sent in the HTTP message body of a POST request
+```
+POST /test/demo_form.php HTTP/1.1
+Host: w3schools.com
+name1=value1&name2=value2
+```
+   * POST requests are never cached
+   * POST requests do not remain in the browser history
+   * POST requests cannot be bookmarked
+   * POST requests have no restrictions on data length
+## Other HTTP Request Methods
+| Methods | Description
+|---------|------------
+| HEAD    | Same as GET but returns only HTTP headers and no document body
+| PUT     | Uploads a representation of the specified URI
+| PATCH   | Update the specified resource
+| DELETE  | Deletes the specified resource
+| OPTIONS | Returns the HTTP methods that the server supports
+| CONNECT | Converts the request connection to a transparent TCP/IP tunnel
+
+## Format of an HTTP Request
+It has three main components, which are:-
+* HTTP Request Method, URI, and Protocol Version - this should always be the first line of an HTTP Request. As it's quite evident from the name itself, it contains the HTTP Request method being used for that particular request, the URI, and the HTTP protocol name with the version being used. It may look like 'GET /servlet/jspName.jsp HTTP/1.1' where the request method being used is 'GET', the URI is '/servlet/jspName.jsp', and the protocol (with version) is 'HTTP/1.1'.
+* HTTP Request Headers - this section of an HTTP Request contains the request headers, which are used to communicate information about the client environment. Few of these headers are: Content-Type, User-Agent, Accept-Encoding, Content-Length, Accept-Language, Host, etc. Very obvious to understand what info do these headers carry, isn't it? The names are quite self-explanatory.
+* HTTP Request Body - this part contains the actual request being sent to the HTTP Server. The HTTP Request Header and Body are separated by a blank line (CRLF sequence, where CR means Carriage Return and LF means Line Feed). This blank line is a mandatory part of a valid HTTP Request.
+
+## Format of an HTTP Response
+Similar to an HTTP Request, an HTTP Response also has three main components, which are:-
+* Protocol/Version, Status Code, and its Description - the very first line of a valid HTTP Response is consists of the protocol name, it's version, status code of the request, and a short description of the status code. A status code of 200 means the processing of request was successful and the description in this case will be 'OK'. Similarly, a status code of '404' means the file requested was not found at the HTTP Server at the expected location and the description in this case is 'File Not Found'.
+* HTTP Response Headers - similar to HTTP Request Headers, HTTP Response Headers also contain useful information. The only difference is that HTTP Request Headers contain information about the environment of the client machine whereas HTTP Response Headers contain information about the environment of the server machine. This is easy to understand as HTTP Requests are formed at the client machine whereas HTTP Responses are formed at the server machine. Few of these HTTP Response headers are: Server, Content-Type, Last-Modified, Content-Length, etc.
+* HTTP Response Body - this the actual response which is rendered in the client window (the browser window). The content of the body will be HTML code. Similar to HTTP Request, in this case also the Body and the Headers components are separated by a mandatory blank line (CRLF sequence).
+
+## Status code
+| S.N | Code & Description 
+|-----|--------------------
+| 1   | **1xx: Informational** It means the request has been received and the process is continuing.
+| 2   | **2xx: Success** It means the action was successfully received, understood, and accepted.
+| 3   | **3xx: Redirection** It means further action must be taken in order to complete the request.
+| 4   | **4xx: Client Error** It means the request contains incorrect syntax or cannot be fulfilled. 
+| 5   | **5xx: Server Error** It means the server failed to fulfill an apparently valid request.
+
+# Query String
+On the World Wide Web, a query string is the part of a uniform resource locator (URL) containing data that does not fit conveniently into a hierarchical path structure. The query string commonly includes fields added to a base URL by a Web browser or other client application, for example as part of an HTML form.
+A typical URL containing a query string is as follows:
+
+## Structure
+```
+http://example.com/over/there?name=ferret
+```
+When a server receives a request for such a page, it may run a program, passing the query string, which in this case is, `name=ferret` unchanged, to the program. The first question mark is used as a separator, and is not part of the query string.
+
+A link in a web page may have a URL that contains a query string. HTML defines three ways a user agent can generate the query string:
+* an HTML form via the `<form>...</form>` element
+* a server-side image map via the ismap attribute on the `<img>` element with a `<img ismap>` construction
+* an indexed search via the now deprecated `<isindex>` element
+### Web forms
+One of the original uses was to contain the content of an HTML form, also known as web form. In particular, when a form containing the fields field1, field2, field3 is submitted, the content of the fields is encoded as a query string as follows:
+```
+field1=value1&field2=value2&field3=value3...
+```
+* The query string is composed of a series of field-value pairs.
+* Within each pair, the field name and value are separated by an equals sign, '='.
+* The series of pairs is separated by the ampersand, '&' (or semicolon, ';' for URLs embedded in HTML and not generated by a `<form>...</form>`. See below).
+
+While there is no definitive standard, most web frameworks allow multiple values to be associated with a single field (e.g. `field1=value1&field1=value2&field2=value3`).
+
+For each field of the form, the query string contains a pair field=value. Web forms may include fields that are not visible to the user; these fields are included in the query string when the form is submitted.
