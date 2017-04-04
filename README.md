@@ -200,29 +200,29 @@ It's a stateless request-response based communication protocol. It's used to sen
 
 An HTTP request consists of two parts: a header that contains a set of global metadata about the browser's capabilities, and a body that can contain information necessary for the server to process the specific request.
 
-* ##GET - Requests data from a specified resource
+##GET - Requests data from a specified resource
 Note that the query string (name/value pairs) is sent in the URL of a GET request
 ```
 /test/demo_form.php?name1=value1&name2=value2
 ```
-   * GET requests can be cached
-   * GET requests remain in the browser history
-   * GET requests can be bookmarked
-   * GET requests should never be used when dealing with sensitive data
-   * GET requests have length restrictions
-   * GET requests should be used only to retrieve data
+* GET requests can be cached
+* GET requests remain in the browser history
+* GET requests can be bookmarked
+* GET requests should never be used when dealing with sensitive data
+* GET requests have length restrictions
+* GET requests should be used only to retrieve data
 
-* ##POST - Submits data to be processed to a specified resource
+##POST - Submits data to be processed to a specified resource
 Note that the query string (name/value pairs) is sent in the HTTP message body of a POST request
 ```
 POST /test/demo_form.php HTTP/1.1
 Host: w3schools.com
 name1=value1&name2=value2
 ```
-   * POST requests are never cached
-   * POST requests do not remain in the browser history
-   * POST requests cannot be bookmarked
-   * POST requests have no restrictions on data length
+* POST requests are never cached
+* POST requests do not remain in the browser history
+* POST requests cannot be bookmarked
+* POST requests have no restrictions on data length
 ## Other HTTP Request Methods
 | Methods | Description
 |---------|------------
@@ -267,7 +267,7 @@ When a server receives a request for such a page, it may run a program, passing 
 A link in a web page may have a URL that contains a query string. HTML defines three ways a user agent can generate the query string:
 * an HTML form via the `<form>...</form>` element
 * a server-side image map via the ismap attribute on the `<img>` element with a `<img ismap>` construction
-* an indexed search via the now deprecated `<isindex>` element
+* an indexed search via the now deprecated `<isindex>` element (Deprecated)
 ### Web forms
 One of the original uses was to contain the content of an HTML form, also known as web form. In particular, when a form containing the fields field1, field2, field3 is submitted, the content of the fields is encoded as a query string as follows:
 ```
@@ -280,3 +280,10 @@ field1=value1&field2=value2&field3=value3...
 While there is no definitive standard, most web frameworks allow multiple values to be associated with a single field (e.g. `field1=value1&field1=value2&field2=value3`).
 
 For each field of the form, the query string contains a pair field=value. Web forms may include fields that are not visible to the user; these fields are included in the query string when the form is submitted.
+
+## URL Encoding
+HTML 5 specifies the following transformation for submitting HTML forms with the "get" method to a web server:
+* Characters that cannot be converted to the correct charset are replaced with HTML numeric character references
+* SPACE is encoded as '+' or '%20'
+* Letters (A–Z and a–z), numbers (0–9) and the characters '*','-','.' and '_' are left as-is
+* All other characters are encoded as %HH hex representation with any non-ASCII characters first encoded as UTF-8 (or other specified encoding)
