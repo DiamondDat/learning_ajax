@@ -150,7 +150,7 @@ $.ajax(url: "/test").done (html) ->
 ### Turbolinks
 Rails ships with the Turbolinks library, which uses Ajax to speed up page rendering in most applications.
 #### How turbolinks work
-The only thing you have to do to enable Turbolinks is have it in your Gemfile, and put `//= require` turbolinks in your JavaScript manifest, which is usually `app/assets/javascripts/application.js`.
+The only thing you have to do to enable Turbolinks is have it in your Gemfile, and put `//= require turbolinks` in your JavaScript manifest, which is usually `app/assets/javascripts/application.js`.
 #### Page change events
 When writing CoffeeScript, you'll often want to do some sort of processing upon page load. With jQuery, you'd write something like this:
 ```
