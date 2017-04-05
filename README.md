@@ -281,7 +281,7 @@ While there is no definitive standard, most web frameworks allow multiple values
 
 For each field of the form, the query string contains a pair field=value. Web forms may include fields that are not visible to the user; these fields are included in the query string when the form is submitted.
 
-## URL Encoding
+### URL Encoding
 HTML 5 specifies the following transformation for submitting HTML forms with the "get" method to a web server:
 * Characters that cannot be converted to the correct charset are replaced with HTML numeric character references
 * SPACE is encoded as '+' or '%20'
