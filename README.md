@@ -200,7 +200,7 @@ It's a stateless request-response based communication protocol. It's used to sen
 
 An HTTP request consists of two parts: a header that contains a set of global metadata about the browser's capabilities, and a body that can contain information necessary for the server to process the specific request.
 
-##GET - Requests data from a specified resource
+### GET - Requests data from a specified resource
 Note that the query string (name/value pairs) is sent in the URL of a GET request
 ```
 /test/demo_form.php?name1=value1&name2=value2
@@ -212,7 +212,7 @@ Note that the query string (name/value pairs) is sent in the URL of a GET reques
 * GET requests have length restrictions
 * GET requests should be used only to retrieve data
 
-##POST - Submits data to be processed to a specified resource
+### POST - Submits data to be processed to a specified resource
 Note that the query string (name/value pairs) is sent in the HTTP message body of a POST request
 ```
 POST /test/demo_form.php HTTP/1.1
